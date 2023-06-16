@@ -11,7 +11,7 @@ class DonutMaker {
     }
 
     donutClicked() {
-        this.donutClick = this.donutClick + this.donutCount 
+        this.donutClick = this.donutClick + this.donutCount; 
     }
     
     getDonutClicked() {
