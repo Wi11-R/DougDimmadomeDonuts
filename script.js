@@ -5,30 +5,62 @@ var donutCount = 0;
 button.addEventListener("click", function() {
     donutCount++;
     document.getElementById("donutClicked").textContent = donutCount;
-    enoughClicks()
+    enoughDonuts()
 });
 
 var button = document.getElementById("autoClick");
-var autoCount = 0;
-var requiredClicks = 10;
+var autoClickCount = 0;
+var donutClicked = 10;
 
 button.disabled = true;
 
-var enoughClicks = function() {
-    if (donutCount >= requiredClicks) {
+var enoughDonuts = function() {
+    if (donutCount >= donutClicked) {
        return button.disabled = false;
     }
-    return button.disabled = true;
+    return button.disabled = true; 
 };
 
 button.addEventListener("click", function() {
-    autoCount++;
-    document.getElementById("autoClicked").textContent = autoCount;
+    autoClickCount++;
+    document.getElementById("autoClicked").textContent = autoClickCount;
 })
 
-var increaseAutoClickerCost = function() {
-    if (autoCount + requiredClicks) {}
-}
+var autoClickCostDisplay = document.getElementById("autoClickCostDisplay");
+
+var autoClickerCost = 10;
+var costIncreasePercentage = 10; // 10% increase
+
+button.addEventListener("click", function() {
+  if (donutCount >= autoClickerCost) {
+    var costIncrease = Math.ceil(autoClickerCost * (costIncreasePercentage / 100));
+    autoClickerCost += costIncrease;
+    donutCount -= autoClickerCost;
+    autoClickCostDisplay.textContent = autoClickerCost;
+    autoClickerCost = Math.ceil(autoClickerCost * costIncrease);
+    console.log("Auto Clicker purchased! Cost increased by", costIncrease);
+
+    startAutoClicker();
+  } else {
+    console.log("Auto Clicker purchased!");
+  }})
+
+  autoClickCount++;
+  console.log("Total Auto Clickers:", autoClickCount);
+
+  function startAutoClicker() {
+    if (autoClickInterval === null) {
+        autoClickInterval = setInterval(autoClick, 1000);
+    }
+  }
+
+  function autoClick() {
+    if (donutCount < autoClickerCost) {
+        donutCount++;
+        donutClicked++;
+        donutClicked();
+    } 
+  }
 
 
 
@@ -40,6 +72,8 @@ var increaseAutoClickerCost = function() {
 
 
 
-//this.modalButton = document.querySelector('#modalBttn');
-//this.modal = document.querySelector('#modal-container');
-//this.close = document.querySelector('#close');
+
+
+this.modalButton = document.querySelector('#modalBttn');
+this.modal = document.querySelector('#modal-container');
+this.close = document.querySelector('#close');
